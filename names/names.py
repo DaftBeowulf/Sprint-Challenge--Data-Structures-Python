@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BinarySearchTree
 
 start_time = time.time()
 
@@ -16,7 +17,14 @@ for name_1 in names_1:
         if name_1 == name_2:
             duplicates.append(name_1)
 
-end_time = time.time()
-print (f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
-print (f"runtime: {end_time - start_time} seconds")
+# BST pseudocode:
+"""
+for n in names_1+names_2: # O(n) runtime
+    BST.insert(n) # creates BST filled with names, can be sorted alphabetically
+    BUT insert appends it to the duplicate array instead if strictly equal (dupe)
+    so BST.insert for the whole concatenated array would approach O(log n)
+"""
 
+end_time = time.time()
+print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
+print(f"runtime: {end_time - start_time} seconds")
