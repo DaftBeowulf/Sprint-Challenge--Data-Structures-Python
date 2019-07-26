@@ -16,42 +16,43 @@ duplicates = []
 #         if name_1 == name_2:
 #             duplicates.append(name_1)
 
-# BST pseudocode:
-"""
-for n in names_1+names_2: # O(n) runtime
-    BST.insert(n) # creates BST filled with names, can be sorted alphabetically
-    BUT insert appends it to the duplicate array instead if strictly equal (dupe)
-    so BST.insert for the whole concatenated array would approach O(log n)
-"""
+
+# O(n) runtime, averages around .01-.02 seconds
+names_1 = {n: 0 for n in names_1}
+
+for n in names_2:
+    if names_1.get(n):
+        duplicates.append(n)
+
+# stretch BST solution, O(n log n) runtime, averages .16 seconds
+# class BinarySearchTree:
+#     def __init__(self, name):
+#         self.name = name
+#         self.left = None
+#         self.right = None
+
+#     def insert(self, name):
+#         # greater names alphabetically become right child
+#         if self.name < name:
+#             if self.right:
+#                 self.right.insert(name)
+#             else:
+#                 self.right = BinarySearchTree(name)
+#         # alphabetically lower names become left child
+#         elif self.name > name:
+#             if self.left:
+#                 self.left.insert(name)
+#             else:
+#                 self.left = BinarySearchTree(name)
+#         else:  # names are equal--a duplicate
+#             duplicates.append(name)
 
 
-class BinarySearchTree:
-    def __init__(self, name):
-        self.name = name
-        self.left = None
-        self.right = None
+# bst = BinarySearchTree(names_1[0])
 
-    def insert(self, name):
-        # greater names alphabetically become right child
-        if self.name < name:
-            if self.right:
-                self.right.insert(name)
-            else:
-                self.right = BinarySearchTree(name)
-        # alphabetically lower names become left child
-        elif self.name > name:
-            if self.left:
-                self.left.insert(name)
-            else:
-                self.left = BinarySearchTree(name)
-        else:  # names are equal--a duplicate
-            duplicates.append(name)
+# for name in names_1[1:]+names_2:
+#     bst.insert(name)
 
-
-bst = BinarySearchTree(names_1[0])
-
-for name in names_1[1:]+names_2:
-    bst.insert(name)
 
 end_time = time.time()
 print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
