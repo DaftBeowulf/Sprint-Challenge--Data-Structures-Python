@@ -33,13 +33,13 @@ class BinarySearchTree:
 
     def insert(self, name):
         # greater names alphabetically become right child
-        if self.name.lower() < name.lower():
+        if self.name < name:
             if self.right:
                 self.right.insert(name)
             else:
                 self.right = BinarySearchTree(name)
         # alphabetically lower names become left child
-        elif self.name.lower() > name.lower():
+        elif self.name > name:
             if self.left:
                 self.left.insert(name)
             else:
