@@ -18,13 +18,17 @@ duplicates = []
 
 
 # O(n) runtime, averages around .01-.02 seconds
-names_1 = {n: 0 for n in names_1}
+names_hash = {}
 
-for n in names_2:
-    if names_1.get(n):
+for n in names_1 + names_2:
+    if names_hash.get(n):
         duplicates.append(n)
+    else:
+        names_hash[n] = n
 
 # stretch BST solution, O(n log n) runtime, averages .16 seconds
+
+
 # class BinarySearchTree:
 #     def __init__(self, name):
 #         self.name = name
